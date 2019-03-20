@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block title %}
+Dasboard
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+ <div class="container-fluid">
+
+      <hr>
+ <div class="row">
+    <div class="col-4">
+        <nav id="myScrollspy">
+            <ul class="nav nav-pills flex-column">
+                 <li class="nav-item"><a class="nav-link" href="#All_Tour">All Tour</a></li>
+                 <li class="nav-item"><a class="nav-link" href="#MyTour">My Own Created Tour</a></li>
+                 <li class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" >Create Own Tour</a></li>
+             </ul>
+        </nav>
+    </div>
+
+
+
+
+<div class="col-8">
+    <div data-spy="scroll" data-target="#myScrollspy" data-offset="10"
+        style="height:420px;overflow-y: scroll;padding:5px;  ">
+         <h4 id="All_Tour">All Tour</h4>
+<p>                <!-- Button trigger modal -->
+ <ul class="nav nav-pills flex-column">
+        {% for mtour in alltour %}
+ <li class="nav-item"><a class="nav-link" href="#fafa" data-target="#exampleModalCenter">{{ mtour.title }}</a></li>
+        {% endfor %}
+</ul></p>
+
+
+        <h4 id="MyTour">My Own Created Tour</h4>
+<p>
+ <ul class="nav nav-pills flex-column">
+        {% for tour in usertour %}
+ <li class="nav-item"><a class="nav-link" href="#dfasdf" data-target="#exampleModalCenter02">{{ tour.title }}</a></li>
+        {% endfor %}
+</ul>
+
+
+
+</p>
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form method="post" action="{% url 'index' %}">
+            {% csrf_token %}
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create a Tour...</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Title</label>
+            <input type="text" name="title" class="form-control" id="recipient-name">
+          </div>
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Location</label>
+            <input type="text" name="location" class="form-control" id="recipient-name1">
+          </div>
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Duration</label>
+            <input type="text" name="duration" class="form-control" id="recipient-name2">
+          </div>
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Tour Fee</label>
+            <input type="text" name="fee" class="form-control" id="recipient-name3">
+          </div><div class="form-group">
+            <label for="recipient-name" class="col-form-label"> Date of Tour</label>
+            <input type="text" name="date" class="form-control" id="recipient-name4">
+          </div>
+
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Description</label>
+            <textarea class="form-control" name="description" id="message-text"></textarea>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+            </form>
+    </div>
+  </div>
+</div>
+    </div>
+</div>
+ </div>
+     <hr>
+     <hr>
+
+        Other Features Soon....
+ </div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+{% endblock %}

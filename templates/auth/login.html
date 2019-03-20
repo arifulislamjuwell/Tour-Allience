@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %} Login {% endblock %}
+{% block login %}
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'login' %}">Login</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'auth/logreg.css' %}">
+
+    <div class="modal-dialog text-center">
+
+        <div class="col-8 main-section">
+            <div class="modal-content">
+
+                <div class="col-12 user-img">
+
+                    <img src="{% static 'image/face.png'  %}">
+                    <form class="col-12" action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+                        <p style="text-align:center;color:yellow"><b> {{ error_user }} </b></p>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="username" placeholder="Input Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password1" placeholder="Password" required>
+                        </div>
+
+
+
+                        <button type="submit" class="btn"><i class="fas fa-sign-in-alt">Login</i></button>
+                    </form>
+
+                </div>
+
+            </div>
+            </div>
+
+        </div>
+
+{% endblock %}

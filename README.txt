@@ -1,0 +1,1 @@
+An web based dynamic system for tourism .Your tour alliance is a tour optimizer, also an automator for making tour easy and simple.
