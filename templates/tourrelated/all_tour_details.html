@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ tour.title }}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Francois+One|Margarine|Mina" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'tourrelated/alltour.css' %}">
+
+<div class="container">
+<div class="Heading">
+<h1>{{ tour.title }}</h1>
+</div>
+<div class="panel panel-primary">
+      <div class="panel-heading">Tour Description</div>
+      <div class="panel-body"><b>{{ tour.short_description }}</b></div>
+      </div>
+	<div class="panel panel-primary">
+      <div class="panel-heading">Location</div>
+      <div class="panel-body"><b>{{ tour.location }}</b></div>
+    </div>
+	<div class="panel panel-primary">
+      <div class="panel-heading">Duration</div>
+      <div class="panel-body"><b>{{ tour.duration }}</b></div>
+    </div>
+	<div class="panel panel-primary">
+      <div class="panel-heading">Tour Fee</div>
+      <div class="panel-body"><b>{{ tour.fee }}</b></div>
+    </div>
+	<div class="panel panel-primary">
+      <div class="panel-heading">Date of Tour</div>
+      <div class="panel-body"><b>{{ tour.date_of_tour }}</b></div>
+    </div>
+	<button type="button" class="btn btn-primary">Join</button>
+    </div>
+<br>
+{% endblock %}

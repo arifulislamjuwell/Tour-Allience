@@ -5,8 +5,8 @@ from .models import CreateTour
 
 def index(request):
     templates= 'index.html'
-    alltour= CreateTour.objects.all()
-    usertour=alltour.filter(creator=request.user)
+    alltour= CreateTour.objects.all().order_by('-pk')
+    usertour=CreateTour.objects.filter(creator=request.user)
     context={'alltour':alltour,'usertour':usertour}
     if request.method=='POST':
         tour= CreateTour()
@@ -20,4 +20,10 @@ def index(request):
         tour.save()
         return redirect('index')
 
+    return render(request,templates,context)
+
+def all_tour_details(request,pk):
+    templates= 'tourrelated/all_tour_details.html'
+    tour=get_object_or_404(CreateTour, pk=pk)
+    context= {'tour':tour}
     return render(request,templates,context)

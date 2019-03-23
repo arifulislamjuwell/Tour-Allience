@@ -1,0 +1,18 @@
+.container{
+  margin-top:10px;
+
+  width:50%;
+  position:inline;
+  text-align:center;
+  font-family: 'Margarine',cursive;
+  font-family: 'Francois One', sans-serif;
+  font-family: 'Mina', sans-serif;
+  font-size:12.05px;
+  }
+  .panel-primary{
+   margin-bottom:10px;
+
+  }
+  .Heading{
+  margin-bottom:.01px;
+  }

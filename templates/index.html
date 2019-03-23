@@ -3,19 +3,26 @@
 Dasboard
 {% endblock %}
 
+{% block index %}
+      {% if user.is_authenticated %}
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'index' %}"> Index </a>
+    </li>
+      {% endif %}
+{% endblock %}
+
 {% block content %}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
  <div class="container-fluid">
-
-      <hr>
+     <hr>
  <div class="row">
     <div class="col-4">
         <nav id="myScrollspy">
             <ul class="nav nav-pills flex-column">
+                <li class="nav-item"><a class="nav-link" href="#MyTour">My Own Created Tour</a></li>
                  <li class="nav-item"><a class="nav-link" href="#All_Tour">All Tour</a></li>
-                 <li class="nav-item"><a class="nav-link" href="#MyTour">My Own Created Tour</a></li>
                  <li class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" >Create Own Tour</a></li>
              </ul>
         </nav>
@@ -27,26 +34,26 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <div class="col-8">
     <div data-spy="scroll" data-target="#myScrollspy" data-offset="10"
         style="height:420px;overflow-y: scroll;padding:5px;  ">
-         <h4 id="All_Tour">All Tour</h4>
-<p>                <!-- Button trigger modal -->
- <ul class="nav nav-pills flex-column">
-        {% for mtour in alltour %}
- <li class="nav-item"><a class="nav-link" href="#fafa" data-target="#exampleModalCenter">{{ mtour.title }}</a></li>
-        {% endfor %}
-</ul></p>
 
-
-        <h4 id="MyTour">My Own Created Tour</h4>
+               <h4 id="MyTour">My Own Created Tour</h4>
 <p>
  <ul class="nav nav-pills flex-column">
         {% for tour in usertour %}
  <li class="nav-item"><a class="nav-link" href="#dfasdf" data-target="#exampleModalCenter02">{{ tour.title }}</a></li>
         {% endfor %}
-</ul>
+</ul></p>
+
+         <h4 id="All_Tour">All Tour</h4>
+<p>                <!-- Button trigger modal -->
+ <ul class="nav nav-pills flex-column">
+        {% for mtour in alltour %}
+ <li class="nav-item"><a class="nav-link" href="{% url 'all_tour_details' pk=mtour.pk %}" data-target="#exampleModalCenter"><b style="color:gray" >{{ mtour.title }}</b> -- Tour date: {{ mtour.date_of_tour }}</a></li>
+        {% endfor %}
+</ul></p>
+
+    </div>
 
 
-
-</p>
  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -100,6 +107,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
  </div>
      <hr>
      <hr>
+<div>
 
         Other Features Soon....
  </div>
