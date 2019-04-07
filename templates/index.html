@@ -39,7 +39,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <p>
  <ul class="nav nav-pills flex-column">
         {% for tour in usertour %}
- <li class="nav-item"><a class="nav-link" href="#dfasdf" data-target="#exampleModalCenter02">{{ tour.title }}</a></li>
+ <li class="nav-item"><a class="nav-link" href="{{ tour.get_absolute_url }}" data-target="#exampleModalCenter02">{{ tour.title }}</a></li>
         {% endfor %}
 </ul></p>
 
@@ -47,7 +47,7 @@ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw
 <p>                <!-- Button trigger modal -->
  <ul class="nav nav-pills flex-column">
         {% for mtour in alltour %}
- <li class="nav-item"><a class="nav-link" href="{% url 'all_tour_details' pk=mtour.pk %}" data-target="#exampleModalCenter"><b style="color:gray" >{{ mtour.title }}</b> -- Tour date: {{ mtour.date_of_tour }}</a></li>
+ <li class="nav-item"><a class="nav-link" href="{{ mtour.get_absolute_url_another }}" data-target="#exampleModalCenter"><b style="color:gray" >{{ mtour.title }}</b> -- Tour date: {{ mtour.date_of_tour }}</a></li>
         {% endfor %}
 </ul></p>
 

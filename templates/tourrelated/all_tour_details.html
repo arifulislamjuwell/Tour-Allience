@@ -36,7 +36,16 @@
       <div class="panel-heading">Date of Tour</div>
       <div class="panel-body"><b>{{ tour.date_of_tour }}</b></div>
     </div>
-	<button type="button" class="btn btn-primary">Join</button>
+    {% if check %}
+	<button onclick="" type="button" class="btn btn-primary" disabled >Join</button>
+    {% else %}
+    <button type="button" class="btn btn-primary"><a style="color:white: text-decoration:none;" href="javascript:{document.getElementById('join').submit()}">Join</a></button>
+    {% endif %}
+    <form id="join" action="{% url 'join' pk=tour.pk %}" method="post">
+        {% csrf_token %}
+        <input type="hidden">
+    </form>
     </div>
+
 <br>
 {% endblock %}

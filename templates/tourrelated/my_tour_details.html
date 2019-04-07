@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock %}
+
+
+{% block content %}
+{% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'tourrelated/mytour.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css" integrity="sha384-QokYePQSOwpBDuhlHOsX0ymF6R/vLk/UQVz3WHa6wygxI5oGTmDTv8wahFOSspdm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/regular.css" integrity="sha384-FKw7x8fCxuvzBwOJmhTJJsKzBl8dnN9e2R4+pXRfYoHivikuHkzWyhKWDSMcGNK8" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css" integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq" crossorigin="anonymous">
+
+<h1 class="display-4" style="text-align: center;">Admin Panel</h1>
+<div class="Raw">
+<button class="open-button" onclick="openForm()"><i class="fas fa-user-plus"></i> ADD MEMBER</button>
+
+<div class="form-popup" id="myForm">
+
+  <form action="{% url 'add_member' pk=tour.pk %}" method="post" class="form-container">
+
+      {% csrf_token %}
+
+
+    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+
+  <div class="card-header">Add a member</div>
+  <div class="card-body">
+    <input name="name" type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1">
+    <input name="email" type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+    <input name="give" type="text" class="form-control" placeholder="Given Money" aria-label="Given Money" aria-describedby="basic-addon1">
+    <input name="due" type="text" class="form-control" placeholder="Due Money" aria-label="due Money" aria-describedby="basic-addon1">
+  </div>
+</div>
+     <button type="submit" class="btn">Add</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+
+
+    <button class="open-button1" onclick="openForm1()"><i class="fas fa-dollar-sign"></i> EXPENCE</button>
+    <div class="form-popup" id="myForm1">
+  <form method="post" action="{% url 'expense' pk=tour.pk %}" class="form-container">
+      {% csrf_token %}
+      <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header">Add a Cost</div>
+  <div class="card-body">
+    <input name="title" type="text" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
+    <input name="descrip" type="text" class="form-control" placeholder="Description" aria-label="Description" aria-describedby="basic-addon1">
+    <input name="ammount" type="text" class="form-control" placeholder="Amount" aria-label="Amount" aria-describedby="basic-addon1">
+  </div>
+</div>
+
+
+     <button type="submit" class="btn">Add</button>
+    <button type="button" class="btn cancel" onclick="closeForm1()">Close</button>
+  </form>
+
+</div>
+
+<button class="open-button3" onclick="openForm3()"><i class="fas fa-bullhorn"></i> ANNOUNCEMENT</button>
+
+<div class="form-popup" id="myForm3">
+  <form method="post" action="{% url 'schedule' pk=tour.pk %}" class="form-container">
+      {% csrf_token %}
+    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header">Tour Schedule's</div>
+  <div class="card-body">
+    <input name="day" type="text" class="form-control" placeholder="Day" aria-label="Day" aria-describedby="basic-addon1">
+    <input name="time" type="text" class="form-control" placeholder="Time" aria-label="Time" aria-describedby="basic-addon1">
+    <input name="task" type="text" class="form-control" placeholder="Task" aria-label="Task" aria-describedby="basic-addon1">
+
+  </div>
+</div>
+     <button type="submit" class="btn">Add</button>
+    <button type="button" class="btn cancel" onclick="closeForm3()">Close</button>
+  </form>
+
+</div>
+
+
+<button class="open-button4"><i class="fas fa-users"></i> VIEW MEMBER'S</button>
+
+</div>
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+
+}
+function openForm1() {
+  document.getElementById("myForm1").style.display = "block";
+
+}
+
+function closeForm1() {
+  document.getElementById("myForm1").style.display = "none";
+
+}
+function openForm2() {
+  document.getElementById("myForm2").style.display = "block";
+
+}
+
+function closeForm2() {
+  document.getElementById("myForm2").style.display = "none";
+
+}
+function openForm3() {
+  document.getElementById("myForm3").style.display = "block";
+
+}
+
+function closeForm3() {
+  document.getElementById("myForm3").style.display = "none";
+
+}
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<div class="" id="myForm2">
+  <form action="" class="form-container">
+    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header">Money Summery</div>
+  <div class="card-body">
+    <p class="card-text">Expected Money:{{ acc.total_expeted }} taka</p>
+    <p class="card-text">Actual Money:{{ acc.Current_money }} taka</p>
+    <p class="card-text">Due Money: {{ acc.due }} taka</p>
+      <p class="card-text">Ecpense Money: {{ acc.expens }} taka</p>
+
+  </div>
+</div>
+
+    <button type="button" class="btn cancel" onclick="closeForm2()">Close</button>
+  </form>
+
+</div>
+{% endblock %}
