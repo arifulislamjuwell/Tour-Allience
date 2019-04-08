@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'tourrelated/alltour_list.css' %}">
+
+<div class="list-type2">
+<ol>
+    <br>
+    {% for t in alltour %}
+
+<li><a href="{{ t.get_absolute_url_another }}">{{ t.title }} </a></li>
+
+    {% endfor %}
+</ol>
+</div>
+{% endblock %}
+

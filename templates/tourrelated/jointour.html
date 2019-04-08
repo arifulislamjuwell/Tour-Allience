@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'tourrelated/jointour.css' %}">
+<div class="list-type1">
+<ol>
+    {% for i in tour %}
+<li><a href="{{ t.get_absolute_url_join }}">{{ i.tour.title }}  </a></li>
+    {% endfor %}
+</ol>
+</div>
+{% endblock %}

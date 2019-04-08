@@ -7,9 +7,7 @@ import facebook
 
 def index(request):
     templates= 'index.html'
-    alltour=Tour.objects.all().order_by('-pk')
-    usertour=Tour.objects.filter(creator=request.user)
-    context={'alltour':alltour,'usertour':usertour}
+
     if request.method=='POST':
         tour= Tour()
         tour.creator=request.user
@@ -25,7 +23,7 @@ def index(request):
         fb.put_object(parent_object='me',connection_name='feed',message='welcome!a new tour arrive.Tour name:'+str(title)+'Date:'+str(date))
         return redirect('index')
 
-    return render(request,templates,context)
+    return render(request,templates)
 
 def joining(request,pk):
     tour = get_object_or_404(Tour,pk=pk)
@@ -49,7 +47,7 @@ def joining(request,pk):
     member.paid_money=0
     member.due=fee
     member.save()
-    return redirect('index')
+    return redirect('home')
 
 def all_tour_details(request,slug):
     templates= 'tourrelated/all_tour_details.html'
@@ -59,7 +57,7 @@ def all_tour_details(request,slug):
     return render(request,templates,context)
 
 def my_tour_details(request,slug):
-    templates= 'tourrelated/my_tour_details.html'
+    templates= 'tourrelated/manage.html'
     tour=get_object_or_404(Tour, slug=slug)
     allmember=Member_on_tour.objects.all().filter(tour=tour)
     try:
@@ -120,3 +118,24 @@ def schedule(request,pk):
         scobj.task=request.POST.get('task')
         scobj.save()
         return redirect('my_tour_details', slug=tour.slug )
+def managetour(request):
+    templates= 'tourrelated/manage_tour.html'
+    mytour= Tour.objects.all().filter(creator=request.user)
+    context={'tour':mytour}
+    return render(request,templates,context)
+
+def alltour(request):
+    templates='tourrelated/alltour.html'
+    alltour=Tour.objects.all().order_by('-pk')
+    context={'alltour':alltour}
+    return render(request,templates,context)
+
+def jointour(request):
+    templates='tourrelated/jointour.html'
+    tour=Member_on_tour.objects.all().filter(name=request.user.username)
+    tour1= get_object_or_404(Tour,creator=request.user)
+    context={'tour':tour,'t':tour1}
+    return render(request,templates,context)
+def join_tour_manage(request,slug):
+    templates= 'tourrelated/join_manage.html'
+    return render(request,templates)

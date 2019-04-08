@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'tourrelated/manage.css' %}">
+<div id="demo">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Responsive table starts here -->
+  <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
+
+    <div class="table-responsive-vertical shadow-z-1">
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Name</th>
+
+          <th>Days</th>
+          <th>Fee</th>
+          <th>Manage</th>
+          <th>Blog</th>
+        </tr>
+      </thead>
+      <tbody>
+{% for t in tour %}
+        <tr>
+          <td data-title="Date:"> {{ t.date_of_tour }} </td>
+          <td data-title="Name"> {{ t.title }}</td>
+
+
+          <td data-title="Days"> {{ t.duration }}</td>
+           <td data-title="Fee"> {{ t.fee }}</td>
+
+            <td data-title="Manage">
+
+                <button><a href="{{ t.get_absolute_url }}" >Manage</a></button>
+          </td>
+          <td data-title="Blog">
+
+            <a href="" target="_blank">Click here...</a>
+          </td>
+        </tr>
+{% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Table Constructor change table classes, you don't need it in your project -->
+
+
+<script>
+	$(document).ready(function() {
+
+    var table = $('#table');
+
+    // Table bordered
+    $('#table-bordered').change(function() {
+        var value = $( this ).val();
+        table.removeClass('table-bordered').addClass(value);
+    });
+
+    // Table striped
+    $('#table-striped').change(function() {
+        var value = $( this ).val();
+        table.removeClass('table-striped').addClass(value);
+    });
+
+    // Table hover
+    $('#table-hover').change(function() {
+        var value = $( this ).val();
+        table.removeClass('table-hover').addClass(value);
+    });
+
+    // Table color
+    $('#table-color').change(function() {
+        var value = $(this).val();
+        table.removeClass(/^table-mc-/).addClass(value);
+    });
+});
+
+// jQuery’s hasClass and removeClass on steroids
+// by Nikita Vasilyev
+// https://github.com/NV/jquery-regexp-classes
+(function(removeClass) {
+
+	jQuery.fn.removeClass = function( value ) {
+		if ( value && typeof value.test === "function" ) {
+			for ( var i = 0, l = this.length; i < l; i++ ) {
+				var elem = this[i];
+				if ( elem.nodeType === 1 && elem.className ) {
+					var classNames = elem.className.split( /\s+/ );
+
+					for ( var n = classNames.length; n--; ) {
+						if ( value.test(classNames[n]) ) {
+							classNames.splice(n, 1);
+						}
+					}
+					elem.className = jQuery.trim( classNames.join(" ") );
+				}
+			}
+		} else {
+			removeClass.call(this, value);
+		}
+		return this;
+	}
+
+})(jQuery.fn.removeClass);
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+{% endblock %}

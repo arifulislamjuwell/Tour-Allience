@@ -34,6 +34,8 @@ class Tour(models.Model):
         return reverse('my_tour_details', args=[self.slug])
     def get_absolute_url_another(self):
         return reverse('all_tour_details', args=[self.slug])
+    def get_absolute_url_join(self):
+        return reverse('join_tour_manage', args=[self.slug])
 
 class Member_on_tour(models.Model):
     tour=models.ForeignKey(Tour, on_delete=models.CASCADE)

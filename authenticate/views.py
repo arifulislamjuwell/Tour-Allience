@@ -18,7 +18,7 @@ def registration(request):
             except User.DoesNotExist:
                 users= User.objects.create_user(request.POST['username'], password=request.POST['password1'],email=request.POST['email'])
                 auth.login(request, users)
-                return redirect('index')
+                return redirect('home')
 
         else:
             return render(request,templates,contex_password)
@@ -35,7 +35,7 @@ def login (request):
         user =auth.authenticate(username= request.POST['username'], password= request.POST['password1'])
         if user is not None:
             auth.login(request, user)
-            return redirect('index')
+            return redirect('home')
         else:
             return render(request,templates,contex_error)
     else:
