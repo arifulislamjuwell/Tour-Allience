@@ -2,261 +2,99 @@
 
 {% block content %}
 {% load static %}
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700%7CLibre+Baskerville:400,400italic,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css"  href="{% static 'cssjoin/clear.css' %}">
-<link rel="stylesheet" type="text/css"  href="{% static 'cssjoin/common.css' %}">
-<link rel="stylesheet" type="text/css"  href="{% static 'cssjoin/font-awesome.min.css' %}">
-<link rel="stylesheet" type="text/css"  href="{% static 'cssjoin/carouFredSel.css' %}">
-<link rel="stylesheet" type="text/css"  href="{% static 'cssjoin/sm-clean.css' %}">
-<link rel="stylesheet" type="text/css"  href="{% static 'cssjoin/style.css' %}">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 
 <style>
+table {
+  width:100%;
+}
 
-.Announcement{
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+table#t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+ background-color: #fff;
+}
+table#t01 th {
+  background-color: black;
+  color: white;
+}
+* {
+  box-sizing: border-box;
+}
 
-      padding-top: 45px;
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 25px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
 
-              }
-.entry-titleMIne{
-
-      padding-top: 120px;
-
-             }
-  </style>
-
-
-<div id="content" class="site-content">
-   <div id="blog-wrapper">
-        <div class="blog-holder center-relative">
-            <article id="post-1" class="blog-item-holder featured-post">
-                <div class="entry-content relative">
-                     <div class="content-1170 center-relative">
-                         <div class="cat-links">
-                            <ul>
-                                <li>
-                                    <a href="">Created</a>
-                                </li>
-                            </ul>
-
-
-
-
-
-                         </div>
-
-                            <div class="entry-date published">February 12, 2016</div>
-                             <h2 class="entry-title">
-
-                              </h2>
-
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                    </article>
-                    <div class="myclass">
-                    <div class="form-group">
-                        <form id="myForm" method="POST" action="">
-                            <div class="input-group" >
-                              <textarea class="form-control custom-control" rows="3" style="resize:none" ></textarea>
-                               <button type="button" class="btn btn-primary btn-lg">Make Shout</button>
-
-                            </div>
-                        </form>
-                    </div>
-           </div>
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
 
 
+<div class="row">
+  <div class="column" style="background-color:white;">
+    <h2>Create POst</h2>
+    <form action="{% url 'join_tour_manage' pk=tour.pk %}" method="post">
+        {% csrf_token %}
+<textarea name="post" cols="50" rows="5">
 
+</textarea>
+<br />
+<input type="submit" />
+</form>
 
-                    <article id="post-2" class="blog-item-holder">
-                        <div class="entry-content relative">
-                            <div class="content-1170 center-relative">
-                                <h2 class="entry-title">
-                                    <a href="">Post 1</a>
-                                </h2>
-                                <div class="cat-links">
-                                    <ul>
-                                        <li>
-                                            <a href="#">User1</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="entry-date published">February 12, 2016,10:58AM</div>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                    </article>
+  </div>
+  <div class="column" style="background-color:white;">
+    <h2>Tour Schedule</h2>
 
+<table id="t01">
+  <tr>
+    <th>Day</th>
+    <th>Time</th>
+    <th>Task</th>
+  </tr>
+    {% for s in sch %}
+  <tr>
+    <td>{{ s.day }}</td>
+    <td>{{ s.time }}</td>
+    <td>{{ s.task }}</td>
+  </tr>
+    {% endfor %}
+</table>
 
-                    <article id="post-3" class="blog-item-holder">
-                        <div class="entry-content relative">
-                            <div class="content-1170 center-relative">
-                                <h2 class="entry-title">
-                                    <a href="">Everything is design</a>
-                                </h2>
-                                <div class="cat-links">
-                                    <ul>
-                                        <li>
-                                            <a href="#">Art</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="entry-date published">February 12, 2016,10:59AM</div>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                    </article>
+  </div>
 
+</div>
+{% for p in post %}
+<div align="center" class="card">
+  <div class="">
+    {{ p.time }}
+  </div>
+  <div class="">
+    <h6 class="">{{ p.user }}</h6>
+    <p class="">{{ p.post }}</p>
+  </div>
+</div>
 
-
-                    <article id="post-4" class="blog-item-holder">
-                        <div class="entry-content relative">
-                            <div class="content-1170 center-relative">
-                                <h2 class="entry-title">
-                                    <a href="">It’s all about experience</a>
-                                </h2>
-                                <div class="cat-links">
-                                    <ul>
-                                        <li>
-                                            <a href="#">Life</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="entry-date published">February 12, 2016</div>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                    </article>
-
-
-
-                    <article id="post-5" class="blog-item-holder">
-                        <div class="entry-content relative">
-                            <div class="content-1170 center-relative">
-                                <h2 class="entry-title">
-                                    <a href="">This is not my code</a>
-                                </h2>
-                                <div class="cat-links">
-                                    <ul>
-                                        <li>
-                                            <a href="#">Coding</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="entry-date published">February 12, 2016</div>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                    </article>
-
-
-
-                    <article id="post-6" class="blog-item-holder">
-                        <div class="entry-content relative">
-                            <div class="content-1170 center-relative">
-                                <h2 class="entry-title">
-                                    <a href="">Support human activity</a>
-                                </h2>
-                                <div class="cat-links">
-                                    <ul>
-                                        <li>
-                                            <a href="#">Advocacy</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="entry-date published">February 12, 2016</div>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                    </article>
-
-                </div>
-                <div class="clear"></div>
-                <div class="block load-more-holder">LOAD MORE ENTRIES</div>
-            </div>
-
-            <div class="Announcement">
-
-             <article id="post-2" class="blog-item-holder">
-                        <div class="entry-content relative">
-                            <div class="content-1170 center-relative">
-                                <h2 class="entry-titleMIne">
-
-                                            <a href=""><u>Description</u></a>
-                                              </h2>
-                                <div class="cat-links">
-                                    <ul>
-                                        <li>
-                                            <a href="">Day1:10:00-Inani</a>
-                                               <div class="entry-date published">February 12, 2016,10:58AM</div>
-                                                <div class="clear"></div>
-
-                                        </li>
-                                    </ul>
-
-
-                                    <ul>
-                                        <li>
-                                            <a href="">Day1:10:00- Saint</a>
-                                             <div class="entry-date published">February 12, 2016,10:58AM</div>
-
-                                             <div class="clear"></div>
-                                        </li>
-                                    </ul>
-
-
-                                             <ul>
-                                        <li>
-                                            <a href="">Travel Date:</a>
-                                               <div class="entry-date published">February 12, 2016,10:58AM</div>
-                                                <div class="clear"></div>
-
-                                        </li>
-                                    </ul>
-                                           <ul>
-                                        <li>
-                                            <a href="">Total Member:</a>
-                                               <div class="entry-date published">30</div>
-                                                <div class="clear"></div>
-
-                                        </li>
-                                    </ul>
-
-                                             <div class="clear"></div>
-
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </article>
-            </div>
-            <div class="clear"></div>
-
-        </div>
-        <script >
-
-
-                 ; (function ($) {
-  $('#submitMyForm').on('click', function () {
-    //$('#myForm').submit(); // js fiddle won't allow this
-    alert("form submitted");
-  });
-
-})(jQuery)
-        </script>
-
-
-
-        <!--Load JavaScript-->
-<script type="text/javascript" src="{% static 'jsjoin/jquery.js' %}"></script>
-<script type='text/javascript' src="{% static 'jsjoin/jquery.nicescroll.min.js' %}"></script>
-<script type='text/javascript' src="{% static 'jsjoin/main.js' %}"></script>
-
+{% endfor %}
 
 
 

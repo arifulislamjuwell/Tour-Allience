@@ -1,0 +1,31 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-container">
+  <h2>Member Of this tour</h2>
+
+  <table class="w3-table-all">
+    <thead>
+      <tr class="w3-light-grey w3-hover-red">
+        <th>Name</th>
+        <th>Mail</th>
+        <th>Paid Money</th>
+          <th>Due Money</th>
+      </tr>
+    </thead>
+{% for mem in member %}
+
+    <tr class="w3-hover-black">
+      <td>{{ mem.name }}</td>
+      <td>{{ mem.mail }}</td>
+      <td>{{ mem.p_money }}</td>
+        <td>{{ mem.due }}</td>
+    </tr>
+{% endfor %}
+  </table>
+</div>
+{% endblock %}

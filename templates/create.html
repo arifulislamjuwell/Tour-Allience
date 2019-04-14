@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'tourrelated/create.css' %}">
+<div class="container">
+  <form id="contact" action="{% url 'createtour' %}" method="post">
+      {% csrf_token %}
+    <h3>Create Tour</h3>
+    <h4></h4>
+    <fieldset>
+      <input placeholder="Tour Title" name="title" type="text" tabindex="1" required autofocus>
+    </fieldset>
+    <fieldset>
+      <input placeholder="Location" name="location" type="text" tabindex="2" required>
+    </fieldset>
+    <fieldset>
+      <input placeholder="Duration" name="duration" type="tel" tabindex="3" required>
+    </fieldset>
+          <fieldset>
+      <input placeholder="Date" name="date" type="tel" tabindex="3" required>
+    </fieldset>
+    <fieldset>
+      <input placeholder="Fee" name="fee" type="text" tabindex="4" required>
+    </fieldset>
+    <fieldset>
+      <textarea placeholder="Description" name="description" tabindex="5" required></textarea>
+    </fieldset>
+    <fieldset>
+      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+    </fieldset>
+  </form>
+</div>
+{% endblock %}

@@ -6,7 +6,9 @@
 <div class="list-type1">
 <ol>
     {% for i in tour %}
-<li><a href="{{ t.get_absolute_url_join }}">{{ i.tour.title }}  </a></li>
+
+<li><a href="{% url 'join_tour_manage' pk=i.tour.pk %}">{{ i.tour.title }}  </a></li>
+
     {% endfor %}
 </ol>
 </div>

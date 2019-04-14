@@ -68,3 +68,9 @@ class Schedule(models.Model):
     day=models.CharField(max_length=20)
     time=models.CharField(max_length=20)
     task=models.TextField(max_length=300)
+
+class Post(models.Model):
+    tour=models.ForeignKey(Tour, on_delete=models.CASCADE)
+    user=models.ForeignKey(User, on_delete=models.CASCADE )
+    post=models.CharField(max_length=200)
+    time=models.DateTimeField(auto_now_add=True)

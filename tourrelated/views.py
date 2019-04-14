@@ -5,8 +5,8 @@ from django.db.models import F
 import facebook
 # Create your views here.
 
-def index(request):
-    templates= 'index.html'
+def cratetour(request):
+    templates='create.html'
 
     if request.method=='POST':
         tour= Tour()
@@ -18,10 +18,10 @@ def index(request):
         tour.fee =request.POST.get('fee')
         tour.short_description= request.POST.get('description')
         tour.save()
-        token='EAAFdmc17CgkBAGGSUJKblohZA9wizjLl4dZA6rGsuRT8Ma21UZCUHS06EuB69aqqR1nYoZAVZAhMEju9e4GwP68NF1GYYlZAfAtXjzUmZCRcCqjFWy2sMeZCGuKgA2uPGCu5BxkRSVq0hw4ehJJaOCZB33mqc60pm9aBOlXlbwupAi7qFZBuAZAtjlP1ggEg1Czi2byh656gqGKVH87mZCc5gdsl'
+        token='EAAFdmc17CgkBAOZAnnZBY6ypXqySL32IhuPzvZBjHjhGcJC9XDzF3aPR8JiZBjbMI9fAGdZCfvwgG73Dp7xTQ49KKadElVxmfj3YUV0xzz40YvYAvqhYDBb4DkkKk2k263GJnOFZBZAIOeLEJ3OAcogiEl9907lZBZADCcxYIPn4ECKOo0gTWDiZA9gg8HWyrlWN064hwJQy4vxZCIhATDhgEev'
         fb=facebook.GraphAPI(access_token=token)
-        fb.put_object(parent_object='me',connection_name='feed',message='welcome!a new tour arrive.Tour name:'+str(title)+'Date:'+str(date))
-        return redirect('index')
+        fb.put_object(parent_object='me',connection_name='feed',message='welcome!a new Tour Arrived.'+'Tour name:'+str(title)+'Date:'+str(date))
+        return redirect('home')
 
     return render(request,templates)
 
@@ -118,6 +118,7 @@ def schedule(request,pk):
         scobj.task=request.POST.get('task')
         scobj.save()
         return redirect('my_tour_details', slug=tour.slug )
+
 def managetour(request):
     templates= 'tourrelated/manage_tour.html'
     mytour= Tour.objects.all().filter(creator=request.user)
@@ -132,10 +133,33 @@ def alltour(request):
 
 def jointour(request):
     templates='tourrelated/jointour.html'
-    tour=Member_on_tour.objects.all().filter(name=request.user.username)
-    tour1= get_object_or_404(Tour,creator=request.user)
+    tour=Member_on_tour.objects.filter(name=request.user.username)
+    tour1= Tour.objects.filter(creator=request.user)
     context={'tour':tour,'t':tour1}
     return render(request,templates,context)
-def join_tour_manage(request,slug):
+
+def join_tour_manage(request,pk):
+    tour=get_object_or_404(Tour, pk=pk)
+    sch=Schedule.objects.filter(tour__pk=pk)
     templates= 'tourrelated/join_manage.html'
-    return render(request,templates)
+    if request.method=="POST":
+        post=Post()
+        post.user=request.user
+        post.tour=tour
+        post.post=request.POST.get('post')
+        post.save()
+        return redirect('join_tour_manage',pk=pk)
+
+    post_1=Post.objects.filter(tour__pk=pk)
+    try:
+        sc=get_object_or_404(Schedule, tour__pk=pk)
+        context={'sch':sch,'s':sc,'tour':tour,'post':post_1}
+    except:
+        context={'sch':sch,'no':'No sachedule','tour':tour,'post':post_1}
+    return render(request,templates,context)
+
+def viewmember(request,pk):
+    templates='tourrelated/member.html'
+    member=Member_on_tour.objects.filter(tour__pk=pk)
+    context={'member':member}
+    return render(request,templates,context)

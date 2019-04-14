@@ -8,7 +8,9 @@ urlpatterns = [
      path ('manage-tour/',views.managetour,name='manage'),
      path ('all-tour/',views.alltour, name='alltour'),
      path ('join-tour/',views.jointour,name='jointour'),
-     path ('join-tour/<str:slug>/',views.join_tour_manage,name='join_tour_manage'),
+     path ('join-tour/<int:pk>/',views.join_tour_manage,name='join_tour_manage'),
+     path ('create-tour/',views.cratetour,name='createtour'),
+     path ('view-member/<int:pk>/',views.viewmember,name='member'),
 
      path('add-member/<int:pk>/',views.add_member, name='add_member'),
      path ('expense/<int:pk>/',views.expense, name='expense'),

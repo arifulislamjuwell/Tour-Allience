@@ -6,15 +6,75 @@
 
 {% block content %}
 {% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'tourrelated/mytour.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'tourrelated/mytour.css' %}">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css" integrity="sha384-QokYePQSOwpBDuhlHOsX0ymF6R/vLk/UQVz3WHa6wygxI5oGTmDTv8wahFOSspdm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/regular.css" integrity="sha384-FKw7x8fCxuvzBwOJmhTJJsKzBl8dnN9e2R4+pXRfYoHivikuHkzWyhKWDSMcGNK8" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css" integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq" crossorigin="anonymous">
 
-<h1 class="display-4" style="text-align: center;">Admin Panel</h1>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+.column1 {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+
+}
+</style>
+
+
+
+<h1 class="display-4" style="text-align: center;">Tour Management</h1>
+
+<div class="row">
+  <div class="column" style="background-color:white;">
+<div class="" id="myForm2">
+  <form action="" class="form-container">
+    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header">Money Summery</div>
+  <div class="card-body">
+    <p class="card-text">Expected Money:{{ acc.total_expeted }} taka</p>
+    <p class="card-text">Actual Money:{{ acc.Current_money }} taka</p>
+    <p class="card-text">Due Money: {{ acc.due }} taka</p>
+      <p class="card-text">Ecpense Money: {{ acc.expens }} taka</p>
+
+  </div>
+</div>
+  </form>
+
+</div>
+  </div>
+  <div class="column1" style="background-color:white;">
+      <p><button style="background-color: yellow;color: black;border: 15px solid blue;" class="" onclick="openForm()"><i class="fas fa-user-plus"></i> ADD MEMBER</button></p>
+      <p><button style="background-color: yellow;color: black;border: 15px solid blue;" class="" onclick="openForm1()"><i class="fas fa-dollar-sign"></i> EXPENCE</button></p>
+      <p><button style="background-color: yellow;color: black;border: 15px solid blue;" class="" onclick="openForm3()"><i class="fas fa-bullhorn"></i> ANNOUNCEMENT</button></p>
+      <p><button style="background-color: yellow;color: black;border: 15px solid blue;" class=""><i class="fas fa-users"></i> <a style="color:black; text-decoration: none;" href="{% url 'member' pk=tour.pk %}"> View Member</a> </button></p>
+  </div>
+</div>
+
+
+
 <div class="Raw">
-<button class="open-button" onclick="openForm()"><i class="fas fa-user-plus"></i> ADD MEMBER</button>
+
 
 <div class="form-popup" id="myForm">
 
@@ -39,7 +99,7 @@
 </div>
 
 
-    <button class="open-button1" onclick="openForm1()"><i class="fas fa-dollar-sign"></i> EXPENCE</button>
+
     <div class="form-popup" id="myForm1">
   <form method="post" action="{% url 'expense' pk=tour.pk %}" class="form-container">
       {% csrf_token %}
@@ -59,7 +119,7 @@
 
 </div>
 
-<button class="open-button3" onclick="openForm3()"><i class="fas fa-bullhorn"></i> ANNOUNCEMENT</button>
+
 
 <div class="form-popup" id="myForm3">
   <form method="post" action="{% url 'schedule' pk=tour.pk %}" class="form-container">
@@ -80,7 +140,7 @@
 </div>
 
 
-<button class="open-button4"><i class="fas fa-users"></i> VIEW MEMBER'S</button>
+
 
 </div>
 
@@ -128,21 +188,5 @@ function closeForm3() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<div class="" id="myForm2">
-  <form action="" class="form-container">
-    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-  <div class="card-header">Money Summery</div>
-  <div class="card-body">
-    <p class="card-text">Expected Money:{{ acc.total_expeted }} taka</p>
-    <p class="card-text">Actual Money:{{ acc.Current_money }} taka</p>
-    <p class="card-text">Due Money: {{ acc.due }} taka</p>
-      <p class="card-text">Ecpense Money: {{ acc.expens }} taka</p>
 
-  </div>
-</div>
-
-    <button type="button" class="btn cancel" onclick="closeForm2()">Close</button>
-  </form>
-
-</div>
 {% endblock %}
